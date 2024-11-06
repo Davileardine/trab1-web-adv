@@ -1,0 +1,39 @@
+<div class="page page-center">
+  <div class="container container-tight py-4">
+    <div class="text-center mb-4">
+      <a href="." class="navbar-brand navbar-brand-autodark">
+        <img src="assets/img/logo-uvv.png" alt="logo" class="navbar-brand-image">
+      </a>
+    </div>
+    <div class="card card-md">
+      <div class="card-body">
+        <h2 class="h2 text-center mb-4">Faça login na sua conta</h2>
+        <form [formGroup]="myFormIn" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input formControlName="email" type="email" class="form-control" placeholder="Seu email" autocomplete="off"
+                   [ngClass]="{'is-invalid': myFormIn.get('email')?.errors && myFormIn.get('email')?.touched}">
+            @if (myFormIn.get('email')?.errors?.['required'] && myFormIn.get('email')?.touched) {
+              <div class="invalid-feedback">Email é obrigatório</div>
+            }
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Password</label>
+            <input formControlName="password" type="password" class="form-control" placeholder="Sua senha"
+                   autocomplete="off"
+                   [ngClass]="{'is-invalid': myFormIn.get('password')?.errors && myFormIn.get('password')?.touched}">
+            @if (myFormIn.get('password')?.errors?.['required'] && myFormIn.get('password')?.touched) {
+              <div class="invalid-feedback">Senha é obrigatória</div>
+            }
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="btn btn-primary w-100" [disabled]="!myFormIn.valid">Entrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="text-center text-secondary mt-3">
+      Ainda não tem conta? <a [routerLink]="['../signup']" tabindex="-1">Registrar</a>
+    </div>
+  </div>
+</div>

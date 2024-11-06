@@ -1,0 +1,12 @@
+<app-header/>
+<div class="container">
+  <h2>Lista de Chats</h2>
+  
+  <div *ngFor="let chat of chats">
+    <a [routerLink]="['/mensagens', chat._id]">{{ chat.name }}</a>
+  </div>
+
+  <div class="mt-3">
+    <a [routerLink]="'/chat/criar'" class="btn btn-primary">Criar Novo Chat</a>
+  </div>
+</div>

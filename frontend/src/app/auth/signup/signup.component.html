@@ -1,0 +1,86 @@
+<div class="page page-center">
+  <div class="container container-tight py-4">
+    <div class="text-center mb-4">
+      <a href="." class="navbar-brand navbar-brand-autodark">
+        <img src="assets/img/logo-uvv.png" alt="logo" class="navbar-brand-image">
+      </a>
+    </div>
+    <form class="card card-md" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Criar nova conta</h2>
+        <div class="mb-3">
+          <label class="form-label">Nome</label>
+          <input formControlName="name" type="text" class="form-control" placeholder="Digite seu nome"
+                 [ngClass]="{'is-invalid': myForm.get('name')?.errors?.['required'] && myForm.get('name')?.touched}">
+          @if (myForm.get('name')?.errors?.['required'] && myForm.get('name')?.touched) {
+            <div class="invalid-feedback"> Nome é obrigatório</div>
+          }
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input formControlName="email" type="email" class="form-control" placeholder="Digite o e-mail"
+                 [ngClass]="{'is-invalid': myForm.get('email')?.errors && myForm.get('email')?.touched}">
+          @if (myForm.get('email')?.errors?.['required'] && myForm.get('email')?.touched) {
+            <div class="invalid-feedback"> Email é obrigatório</div>
+          } @else if (myForm.get('email')?.errors?.['pattern'] && myForm.get('email')?.touched) {
+            <div class="invalid-feedback"> Email inválido</div>
+          }
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Senha</label>
+          <input formControlName="password" type="password" class="form-control" placeholder="Password"
+                 autocomplete="off"
+                 [ngClass]="{'is-invalid': myForm.get('password')?.errors?.['required'] && myForm.get('password')?.touched}">
+          @if (myForm.get('password')?.errors?.['required'] && myForm.get('password')?.touched) {
+            <div class="invalid-feedback"> Senha é obrigatória</div>
+          }
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Confirme a Senha</label>
+          <input formControlName="confirmPassword" type="password" class="form-control" placeholder="Confirme a Password"
+                 autocomplete="off"
+                 [ngClass]="{'is-invalid': myForm.get('confirmPassword')?.errors?.['required'] && myForm.get('confirmPassword')?.touched || myForm.hasError('mismatch') && myForm.get('confirmPassword')?.touched}">
+          <div *ngIf="myForm.get('confirmPassword')?.errors?.['required'] && myForm.get('confirmPassword')?.touched" class="invalid-feedback">
+              Confirmação da senha é obrigatória
+          </div>
+          <div *ngIf="myForm.hasError('mismatch') && myForm.get('confirmPassword')?.touched" class="invalid-feedback">
+              As senhas não coincidem
+          </div>
+      </div>
+        <div class="hr-text">
+          Informações adicionais
+        </div>
+        <div class="mb-3 row">
+          <div class="col">
+            <label class="form-label">Sexo</label>
+            <select formControlName="sexo" class="form-select">
+              <option value="masculino">Masculino</option>
+              <option value="feminino">Feminino</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="form-label">Data de nascimento</label>
+            <input formControlName="dataNascimento" type="date" class="form-control">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-check">
+            <input type="checkbox" class="form-check-input" formControlName="termos">
+            <span class="form-check-label"
+                  [ngClass]="{'is-invalid': myForm.get('termos')?.errors?.['required'] && myForm.get('termos')?.touched}"
+            >Concordo com os <a href="https://policies.google.com/privacy"
+                                                              tabindex="-1">termos e política</a>.</span>
+            <div class="invalid-feedback"> Você deve concordar!</div>
+          </label>
+        </div>
+        <div class="form-footer">
+          <button type="submit" class="btn btn-primary w-100" [disabled]="!myForm.valid">Criar nova conta</button>
+        </div>
+      </div>
+    </form>
+    <div class="text-center text-secondary mt-3">
+      Já tem conta? <a [routerLink]="['../signin']" tabindex="-1">Entrar</a>
+    </div>
+  </div>
+</div>

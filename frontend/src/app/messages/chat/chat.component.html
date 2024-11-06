@@ -1,0 +1,43 @@
+
+<div class="chat">
+  <div class="chat-bubbles">
+    
+    <div *ngFor="let message of messages; trackBy: trackById" class="chat-item mb-3">
+      <div class="row align-items-end" [ngClass]="{ 'justify-content-end': message.user._id === user._id }" data-bs-toggle="dropdown">
+        
+        <div class="col col-lg-6">
+          <div class="bg-body-secondary px-3 py-2 rounded-4">
+            <div class="mb-1">
+              <div class="row">
+                <div class="col fw-bolder">{{ message.user.name }}</div>
+                <div class="col-auto text-muted">{{ message.createdAt | date: 'dd/MM/yyyy HH:mm' }}</div>
+              </div>
+            </div>
+            <div class="text-muted">
+              <div>{{ message.content }}</div>
+              
+              <small *ngIf="message.updatedAt" style="font-style: italic">Editado</small>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="col-auto">
+          <div class="col-auto"><span class="avatar"
+            style="background-image: url('https://ui-avatars.com/api/?name={{ message.user.name[0] }}&color=7F9CF5&background=EBF4FF')"></span>
+          </div>
+        </div>
+      </div>
+
+      
+      <div *ngIf="message.user._id === user._id" class="dropdown-menu dropdown-menu-end bg-body-secondary">
+        <div class="d-flex justify-content-around">
+          <a class="btn btn-primary" (click)="onEdit(message._id)">Editar</a>
+          <a class="btn btn-danger" (click)="onDelete(message._id)">Deletar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+</div>

@@ -1,0 +1,19 @@
+div {
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+h1 {
+  color: red;
+  font-size: 50px;
+  margin-top: 50px;
+}
+
+p {
+  font-size: 24px;
+}
+
+img {
+  width: 100px;
+  margin-top: 20px;
+}
